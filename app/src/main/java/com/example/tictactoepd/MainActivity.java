@@ -3,6 +3,7 @@ package com.example.tictactoepd;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -104,21 +105,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void player1Wins() {
         player1WinCount++;
+
         String msg = "Player 1 wins!";
-        messagesViewMessage.setText(msg);
+        showPopupWindow("",msg);
         resetBoard();
     }
 
     private void player2Wins() {
         player2WinCount++;
         String msg = "Player 2 wins!";
-        messagesViewMessage.setText(msg);
+        showPopupWindow("",msg);
         resetBoard();
     }
 
     private void draw() {
         String msg = "It's a Draw!";
-        messagesViewMessage.setText(msg);
+        showPopupWindow("",msg);
         resetBoard();
     }
 
@@ -138,6 +140,11 @@ public class MainActivity extends AppCompatActivity {
         TextView playerTwoScore = findViewById(R.id.player2Score);
         playerOneScore.setText(String.valueOf(player1WinCount));
         playerTwoScore.setText(String.valueOf(player2WinCount));
+    }
+
+    private void showPopupWindow(String header, String message ) {
+        PopUpWindow popupWindow = new PopUpWindow(this,header,message);
+        popupWindow.showAtLocation(findViewById(R.id.winMessage), Gravity.CENTER, 0, 0);
     }
 
     private void resetBoard() {
